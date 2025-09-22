@@ -1,14 +1,15 @@
 {
   "name": "pivot-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist",
+  "homepage": "https://mittalrahul074.github.io/sku_summery",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview"
   },
   "dependencies": {

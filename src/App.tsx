@@ -70,7 +70,6 @@ const App: React.FC = () => {
     <div className="table-container">
       <h2>{title}</h2>
       <div className="table-wrapper">
-        {grandTotal > 0 && <p className="grand-total">Grand Total: {grandTotal}</p>}
         <table>
           <thead>
             <tr>
@@ -97,6 +96,7 @@ const App: React.FC = () => {
       <input type="file" accept=".xlsx,.xls,.csv" onChange={handleFileUpload} />
       {renderBtn(group1, "K/L/D SKUs")}
       {renderBtn(group2, "R SKUs")}
+      {grandTotal > 0 && <p className="grand-total">Grand Total: {grandTotal}</p>}
       {group1.length > 0 && renderTable(group1, "K/L/D SKUs")}
       {group2.length > 0 && renderTable(group2, "R SKUs")}
     </div>

@@ -9,6 +9,7 @@ interface SummaryItem {
 const App: React.FC = () => {
   const [group1, setGroup1] = useState<SummaryItem[]>([]);
   const [group2, setGroup2] = useState<SummaryItem[]>([]);
+  const [grandTotal, setGrandTotal] = useState<number>(0);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -25,6 +26,7 @@ const App: React.FC = () => {
       const qtyCol = 18; // Column S
       const map1: Record<string, number> = {};
       const map2: Record<string, number> = {};
+      let grandTotal = 0;
 
       rows.slice(1).forEach((row) => {
         const sku = row[skuCol];
@@ -36,11 +38,14 @@ const App: React.FC = () => {
           } else if (firstChar === "R") {
             map2[sku] = (map2[sku] || 0) + qty;
           }
+
+          grandTotal += qty;
         }
       });
 
       setGroup1(Object.entries(map1).map(([sku, qty]) => ({ sku, qty })));
       setGroup2(Object.entries(map2).map(([sku, qty]) => ({ sku, qty })));
+      setGrandTotal(grandTotal);
     };
     reader.readAsArrayBuffer(file);
   };
@@ -65,6 +70,7 @@ const App: React.FC = () => {
     <div className="table-container">
       <h2>{title}</h2>
       <div className="table-wrapper">
+        {grandTotal > 0 && <p className="grand-total">Grand Total: {grandTotal}</p>}
         <table>
           <thead>
             <tr>
